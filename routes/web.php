@@ -26,3 +26,12 @@ Route::get('/crud', function () {
 
     return view('crud/index', $data);
 })->name('crudy');
+
+
+Route::get('/contact', function () {
+    return view('contact', ['name' => 'luis']);
+})->name('contact');
+
+Route::get('/contact2', function () {
+    return view('contact2');
+})->name('contact2');
