@@ -1,13 +1,20 @@
 <?php
 
+use App\Http\Controllers\PrimerControlador;
+use App\Http\Controllers\SegundoControlador;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return 'welcome';
+Route::get('test', [PrimerControlador::class, 'index'] ) ;
+
+Route::get('otro/{post}/{otro}', [PrimerControlador::class, 'otro'] ) ;
+
+
+Route::get('/test2', function () {
+    return 'test2';
 });
 
 Route::get('/test', function () {
@@ -28,10 +35,13 @@ Route::get('/crud', function () {
 })->name('crudy');
 
 
-Route::get('/contact', function () {
-    return view('contact', ['name' => 'luis']);
-})->name('contact');
+// Route::get('/contact', function () {
+//     // return redirect('/contact2', 303);
+//     // return redirect()->route('contact2');
+//     // return to_route('contact2');
+//     return view('contact', ['name' => 'luis']);
+// })->name('contact');
 
-Route::get('/contact2', function () {
-    return view('contact2');
-})->name('contact2');
+// Route::get('/contact2', function () {
+//     return view('contact2');
+// })->name('contact2');
