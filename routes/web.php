@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\PrimerControlador;
 use App\Http\Controllers\SegundoControlador;
 use Illuminate\Support\Facades\Route;
@@ -45,3 +46,5 @@ Route::get('/crud', function () {
 // Route::get('/contact2', function () {
 //     return view('contact2');
 // })->name('contact2');
+
+Route::resource('post', PostController::class);
