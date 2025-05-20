@@ -13,8 +13,15 @@
     <label for="content">Contenido:</label><br>
     <textarea name="content" id="content" rows="5"></textarea><br><br>
 
-    <label for="category_id">Categoría ID:</label><br>
-    <input type="number" name="category_id" id="category_id"><br><br>
+<label for="category_id">Categoría:</label><br>
+<select name="category_id" id="category_id">
+    @foreach ($categories as $title => $id )
+        <option value="{{ $id }}">{{ $title }}</option>
+    @endforeach
+</select><br><br>
+
+           
+    
 
     <label for="descripcion">Descripción:</label><br>
     <input type="text" name="descripcion" id="descripcion"><br><br>
