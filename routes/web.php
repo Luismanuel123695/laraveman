@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
-=======
+
 
 
 Route::get('/test', function () {
@@ -30,8 +29,6 @@ Route::get('/crud', function () {
 
 
 
-Route::resource('post', PostController::class);
-
-})->name('crudy');
-
->>>>>>> c36cc86ea49e3aceb329a757d7072cbfff195e23
+Route::get('/crud/create', function () {
+    return view('crud/create');
+})->name('crud.create');
