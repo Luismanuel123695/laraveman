@@ -11,7 +11,7 @@
     <?php echo $name ;
     echo $age?> 
 
-    <br>
+
     {{$age}}
     {{$name}}
 
