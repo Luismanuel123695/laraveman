@@ -11,7 +11,11 @@
     <?php echo $name ;
     echo $age?> 
 
+<<<<<<< HEAD
     <br>
+=======
+
+>>>>>>> c36cc86ea49e3aceb329a757d7072cbfff195e23
     {{$age}}
     {{$name}}
 

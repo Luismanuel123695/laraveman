@@ -11,6 +11,7 @@
 
    <a href="{{route("crudy")}}">crud</a>
 
+<<<<<<< HEAD
     
 </body>
 </html>
@@ -26,6 +27,8 @@
     <h1>hello word</h1>
 
    <a href="{{route("crudy")}}">crud</a>
+=======
+>>>>>>> c36cc86ea49e3aceb329a757d7072cbfff195e23
     
 </body>
 </html>
