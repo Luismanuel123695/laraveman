@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\PutRequest;
 use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
+
 use App\Models\Category;
-use Illuminate\Support\Facades\Validator;
 
 
 class PostController extends Controller
@@ -17,8 +17,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts =Post::paginate(2);
+  
 
-        return 'index';
+        return view('dashboard/post/index', compact('posts'));
         //
     }
 
@@ -29,8 +31,10 @@ class PostController extends Controller
     {
 
         $categories = Category::pluck('id', 'title');
+        $post = new Post();
+
    
-        return view('dashboard.post.create', compact('categories'));
+        return view('dashboard.post.create', compact('categories', 'post'));
         //
     }
 
@@ -41,23 +45,6 @@ class PostController extends Controller
     {
         //
 
-        // $validated = validator::make(
-        // $request->all(),
-        // [
-        // 'title' => 'required|string|max:500',
-        // 'slug' => 'required|string|max:500',
-        // 'descripcion' => 'nullable|string|max:100',
-        // 'content' => 'nullable|string',
-        // 'category_id' => 'required|exists:categories,id',
-        // //     //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-
-        // // $request->validate();
-
-        // dd($validated->fails());
-
-        // echo "not";
-       
 
         Post::create($request->validated());
 
@@ -89,14 +76,19 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $categories = Category::pluck('id', 'title');
+        return view('dashboard.post.edit', compact('post', 'categories'));
         //
     }
+ 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PutRequest $request, Post $post)
     {
+        $post->update($request->validated());
+        return to_route('post.index');
         //
     }
 
