@@ -7,9 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hello word</h1>
-
-   <a href="{{route("crudy")}}">crud</a>
+    <h1>Contact 2</h1>
 
     
 </body>

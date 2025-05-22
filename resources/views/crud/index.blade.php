@@ -11,6 +11,7 @@
     <?php echo $name ;
     echo $age?> 
 
+
     {{$age}}
     {{$name}}
 
