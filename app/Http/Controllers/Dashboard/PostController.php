@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::find(2)->delete();
+       // $post = Post::find(2)->delete();
 
 
 
@@ -58,7 +58,7 @@ class PostController extends Controller
 
         $categories = Category::pluck('id', 'title');
    
-        return view('Dashboard.post.create', compact('categories'));
+        return view('dashboard.post.create', compact('categories'));
         //
     }
 
@@ -68,7 +68,34 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request->all());
+
+        $request->validate([
+            'title' => 'required|string|max:500',
+            'slug' => 'required|string|max:500',
+            'descripcion' => 'nullable|string|max:100',
+            'content' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        echo "not";
+       
+
+        Post::create($request->all());
+
+        return to_route('post.index')->with('success', 'Post created successfully');
+        //(
+        //     [
+        //         'title' => $request->all()['title'],
+        //         'slug' => $request->all()['slug'],
+        //         'content' => $request->all()['content'],
+        //         'category_id' => $request->all()['category_id'],
+        //         'descripcion' => $request->all()['descripcion'],
+        //         //'image' => $request->all()['image'],
+        //     ]
+        // );
+         dd($request()->get('title'));
+
     }
 
     /**
