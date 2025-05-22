@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\PutRequest;
+use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
+
 use App\Models\Category;
 
 
@@ -15,38 +17,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::find(2)->delete();
+        $posts =Post::paginate(2);
+  
 
-
-
-        // $post -> update(
-        //     [
-        //         'title' => 'Post 1 new',
-        //         'slug' => 'test slug',
-        //         'content' => 'test content',
-
-        //         'image' => 'test image',
-        //     ]
-        // ); 
-
-
-        //         $post = Post::create(
-        //     [
-        //         'title' => 'Post 1',
-        //         'slug' => 'test slug',
-        //         'content' => 'test content',
-        //         'category_id' => 1,
-        //         'descripcion' => 'test descripcion',
-        //         'posted' => 'not',
-        //         'image' => 'test image',
-        //     ]
-        // ); 
-
-        //dd($post);
-
-
-
-        return 'index';
+        return view('dashboard/post/index', compact('posts'));
         //
     }
 
@@ -57,17 +31,36 @@ class PostController extends Controller
     {
 
         $categories = Category::pluck('id', 'title');
+        $post = new Post();
+
    
-        return view('Dashboard.post.create', compact('categories'));
+        return view('dashboard.post.create', compact('categories', 'post'));
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
+
+
+        Post::create($request->validated());
+
+        return to_route('post.index')->with('success', 'Post created successfully');
+        //(
+        //     [
+        //         'title' => $request->all()['title'],
+        //         'slug' => $request->all()['slug'],
+        //         'content' => $request->all()['content'],
+        //         'category_id' => $request->all()['category_id'],
+        //         'descripcion' => $request->all()['descripcion'],
+        //         //'image' => $request->all()['image'],
+        //     ]
+        // );
+         dd($request()->get('title'));
+
     }
 
     /**
@@ -83,14 +76,19 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $categories = Category::pluck('id', 'title');
+        return view('dashboard.post.edit', compact('post', 'categories'));
         //
     }
+ 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PutRequest $request, Post $post)
     {
+        $post->update($request->validated());
+        return to_route('post.index');
         //
     }
 

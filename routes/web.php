@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Dashboard\PostController;
-use App\Http\Controllers\PrimerControlador;
+
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 
 Route::get('/test', function () {
@@ -28,7 +29,8 @@ Route::get('/crud', function () {
 
 
 
+Route::get('/crud/create', function () {
+    return view('crud/create');
+})->name('crud.create');
+
 Route::resource('post', PostController::class);
-
-})->name('crudy');
-
