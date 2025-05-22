@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
 
 
 class PostController extends Controller
@@ -15,36 +17,6 @@ class PostController extends Controller
      */
     public function index()
     {
-       // $post = Post::find(2)->delete();
-
-
-
-        // $post -> update(
-        //     [
-        //         'title' => 'Post 1 new',
-        //         'slug' => 'test slug',
-        //         'content' => 'test content',
-
-        //         'image' => 'test image',
-        //     ]
-        // ); 
-
-
-        //         $post = Post::create(
-        //     [
-        //         'title' => 'Post 1',
-        //         'slug' => 'test slug',
-        //         'content' => 'test content',
-        //         'category_id' => 1,
-        //         'descripcion' => 'test descripcion',
-        //         'posted' => 'not',
-        //         'image' => 'test image',
-        //     ]
-        // ); 
-
-        //dd($post);
-
-
 
         return 'index';
         //
@@ -65,23 +37,29 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
 
-        $request->validate([
-            'title' => 'required|string|max:500',
-            'slug' => 'required|string|max:500',
-            'descripcion' => 'nullable|string|max:100',
-            'content' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-            //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // $validated = validator::make(
+        // $request->all(),
+        // [
+        // 'title' => 'required|string|max:500',
+        // 'slug' => 'required|string|max:500',
+        // 'descripcion' => 'nullable|string|max:100',
+        // 'content' => 'nullable|string',
+        // 'category_id' => 'required|exists:categories,id',
+        // //     //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
 
-        echo "not";
+        // // $request->validate();
+
+        // dd($validated->fails());
+
+        // echo "not";
        
 
-        Post::create($request->all());
+        Post::create($request->validated());
 
         return to_route('post.index')->with('success', 'Post created successfully');
         //(

@@ -1,6 +1,10 @@
 @extends('dashboard.master')
 
 @section('content')
+
+@include('dashboard.fragment._error_form')
+
+
     <form action="{{ route('post.store') }}" method="post">
 
         @csrf
